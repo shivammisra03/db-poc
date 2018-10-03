@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.gsmysqldata.entity.User;
@@ -21,7 +22,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 	public List<User> getFirstNameLike() {
 		Query query = entityManager.createNativeQuery("select * from user where name LIKE ?", User.class);
 		query.setParameter(1, "s%");
-		
+
 		return query.getResultList();
 
 	}
@@ -51,6 +52,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 		UserResponse response = new UserResponse();
 		response.setResult("User Deleted");
 		return response;
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		StoredProcedureQuery procedureQuery=entityManager.createNamedStoredProcedureQuery("getAllUsers");
+				
+		return procedureQuery.getResultList();
 	}
 
 }

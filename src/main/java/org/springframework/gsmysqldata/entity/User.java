@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
 
 @Entity
+@NamedStoredProcedureQuery(name = "getAllUsers", procedureName = "SelectAllUsers", resultClasses = User.class)
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

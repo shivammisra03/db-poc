@@ -60,4 +60,12 @@ public class UserController {
 
 	}
 
+	@RequestMapping(value = "/getUsingSP", method = RequestMethod.GET)
+	public List<User> getUser() {
+		List<User> users = new ArrayList<>();
+		userRepository.getAllUser().forEach(user -> users.add(user));
+		return users;
+
+	}
+
 }
